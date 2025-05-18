@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuisine Magic 8 Ball</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        .eight-ball {
+            width: 300px;
+            height: 300px;
+            background: #333;
+            border-radius: 50%;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .eight-ball:hover {
+            transform: scale(1.05);
+        }
+
+        .answer-circle {
+            width: 150px;
+            height: 150px;
+            background: #fff;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .answer {
+            font-size: 18px;
+            color: #333;
+        }
+
+        .shake {
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: rotate(0deg); }
+            20% { transform: rotate(-20deg); }
+            40% { transform: rotate(20deg); }
+            60% { transform: rotate(-10deg); }
+            80% { transform: rotate(10deg); }
+        }
+    </style>
+</head>
+<body>
+    <h1>What should I eat today?</h1>
+    <div class="eight-ball" onclick="shakeBall()">
+        <div class="answer-circle">
+            <div class="answer">Click to shake!</div>
+        </div>
+    </div>
+
+    <script>
+        const cuisines = [
+            "Italian 🍝",
+            "Chinese 🥡",
+            "Mexican 🌮",
+            "Japanese 🍱",
+            "Indian 🍛",
+            "Thai 🍜",
+            "Mediterranean 🥙",
+            "American 🍔",
+            "Korean 🍖",
+            "Vietnamese 🍜",
+            "Greek 🥗",
+            "French 🥖",
+            "Brazilian 🥘",
+            "Spanish 🥘",
+            "Middle Eastern 🧆"
+        ];
+
+        function shakeBall() {
+            const ball = document.querySelector('.eight-ball');
+            const answer = document.querySelector('.answer');
+            
+            ball.classList.add('shake');
+            answer.textContent = "Shaking...";
+            
+            setTimeout(() => {
+                const randomCuisine = cuisines[Math.floor(Math.random() * cuisines.length)];
+                answer.textContent = randomCuisine;
+                ball.classList.remove('shake');
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
